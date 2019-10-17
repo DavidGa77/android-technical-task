@@ -14,14 +14,14 @@ import java.util.regex.Pattern
  */
 class LoginActivity : AppCompatActivity() {
 
-    lateinit var btn_sign_in : Button
-    lateinit var til_email : TextInputLayout
-    lateinit var et_email : EditText
-    lateinit var til_password : TextInputLayout
-    lateinit var et_password : EditText
-    lateinit var til_name : TextInputLayout
-    lateinit var et_name : EditText
-    lateinit var pigAnimation : LottieAnimationView
+    lateinit var btn_sign_in: Button
+    lateinit var til_email: TextInputLayout
+    lateinit var et_email: EditText
+    lateinit var til_password: TextInputLayout
+    lateinit var et_password: EditText
+    lateinit var til_name: TextInputLayout
+    lateinit var et_name: EditText
+    lateinit var pigAnimation: LottieAnimationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,28 +53,35 @@ class LoginActivity : AppCompatActivity() {
 
     }
 
-    private fun allFieldsValid() : Boolean {
+    private fun allFieldsValid(): Boolean {
+        var validEmail = false
+        var validPassword = false
+        var validName = false
         var allValid = false
 
         if (Pattern.matches(EMAIL_REGEX, et_email.text.toString())) {
-            allValid = true
+            validEmail = true
         } else {
             til_email.error = getString(R.string.email_address_error)
         }
 
         if (Pattern.matches(PASSWORD_REGEX, et_password.text.toString())) {
-            allValid = true
+            validPassword = true
         } else {
             til_password.error = getString(R.string.password_error)
         }
 
-        if (Pattern.matches(NAME_REGEX, et_password.text.toString())) {
-            allValid = true
+        val name = et_password.text.toString()
+
+        if (name.equals("")) {
+            validName = true
+        }  else if(Pattern.matches(NAME_REGEX, name)) {
+            validName = true
         } else {
             til_email.error = getString(R.string.full_name_error)
         }
 
-        return allValid
+        return validEmail && validPassword && validName
     }
 
     private fun setupAnimation() {
