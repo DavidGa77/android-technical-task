@@ -49,8 +49,6 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(this, R.string.input_valid, Toast.LENGTH_LONG).show()
             }
         }
-
-
     }
 
     private fun allFieldsValid(): Boolean {
@@ -61,21 +59,29 @@ class LoginActivity : AppCompatActivity() {
 
         if (Pattern.matches(EMAIL_REGEX, et_email.text.toString())) {
             validEmail = true
+            til_email.error = null;
         } else {
             til_email.error = getString(R.string.email_address_error)
         }
 
         if (Pattern.matches(PASSWORD_REGEX, et_password.text.toString())) {
             validPassword = true
+            til_password.error = null;
         } else {
             til_password.error = getString(R.string.password_error)
         }
 
-        val name = et_password.text.toString()
+        val name = et_name.text.toString()
 
         when {
-            name.isEmpty() -> validName = true
-            Pattern.matches(NAME_REGEX, name) -> validName = true
+            name.isEmpty() -> {
+                validName = true
+                til_name.error = null;
+            }
+            Pattern.matches(NAME_REGEX, name) -> {
+                validName = true
+                til_name.error = null;
+            }
             else -> til_name.error = getString(R.string.full_name_error)
         }
 
