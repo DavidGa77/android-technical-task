@@ -55,7 +55,6 @@ class LoginActivity : AppCompatActivity() {
         var validEmail = false
         var validPassword = false
         var validName = false
-        var allValid = false
 
         if (Pattern.matches(EMAIL_REGEX, et_email.text.toString())) {
             validEmail = true
