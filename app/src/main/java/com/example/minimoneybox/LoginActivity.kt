@@ -73,12 +73,10 @@ class LoginActivity : AppCompatActivity() {
 
         val name = et_password.text.toString()
 
-        if (name.equals("")) {
-            validName = true
-        }  else if(Pattern.matches(NAME_REGEX, name)) {
-            validName = true
-        } else {
-            til_email.error = getString(R.string.full_name_error)
+        when {
+            name.isEmpty() -> validName = true
+            Pattern.matches(NAME_REGEX, name) -> validName = true
+            else -> til_name.error = getString(R.string.full_name_error)
         }
 
         return validEmail && validPassword && validName
