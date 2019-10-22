@@ -13,4 +13,7 @@
     <string name="input_valid">Input is valid!</string>
     <string name="title_activity_user_accounts">UserAccountsActivity</string>
     <string name="user_accounts">User Accounts\nHello %s\nTotal Plan Value: %s</string>
+    <string name="title_activity_individual_accounts">IndividualAccountsActivity</string>
+    <string name="add_10">Add £10</string>
+    <string name="individual_account">Individual Account\n\n%s\n\nPlan Value: %s \n\nMoneybox: %s</string>
 </resources>

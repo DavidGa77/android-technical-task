@@ -1,5 +1,6 @@
 package com.example.minimoneybox
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.Button
@@ -35,6 +36,16 @@ class UserAccountsActivity : AppCompatActivity() {
         accButton1 = findViewById(R.id.accButton1)
         accButton2 = findViewById(R.id.accButton2)
         accButton3 = findViewById(R.id.accButton3)
+
+        accButton1.setOnClickListener {
+            openIndividualAccPage()
+        }
+        accButton2.setOnClickListener {
+            openIndividualAccPage()
+        }
+        accButton3.setOnClickListener {
+            openIndividualAccPage()
+        }
     }
 
     fun run() = try {
@@ -69,6 +80,11 @@ class UserAccountsActivity : AppCompatActivity() {
 
     } catch (ex: IOException) {
         println("Could not get requested URL")
+    }
+
+    private fun openIndividualAccPage() {
+        val intent = Intent(this, IndividualAccountsActivity::class.java)
+        startActivity(intent)
     }
 
 
