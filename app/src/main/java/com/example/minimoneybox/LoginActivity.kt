@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import com.airbnb.lottie.LottieAnimationView
+import com.airbnb.lottie.LottieDrawable
 import java.util.regex.Pattern
 
 /**
@@ -90,6 +91,9 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun setupAnimation() {
+        pigAnimation.playAnimation()
+        pigAnimation.setMinAndMaxFrame(secondAnim.first, secondAnim.second)
+        pigAnimation.repeatCount = LottieDrawable.INFINITE
         pigAnimation.playAnimation()
     }
 
