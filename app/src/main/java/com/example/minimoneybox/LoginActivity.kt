@@ -1,5 +1,6 @@
 package com.example.minimoneybox
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.TextInputLayout
@@ -47,6 +48,7 @@ class LoginActivity : AppCompatActivity() {
         btn_sign_in.setOnClickListener {
             if (allFieldsValid()) {
                 Toast.makeText(this, R.string.input_valid, Toast.LENGTH_LONG).show()
+                openAccountsPage()
             }
         }
     }
@@ -89,6 +91,11 @@ class LoginActivity : AppCompatActivity() {
 
     private fun setupAnimation() {
         pigAnimation.playAnimation()
+    }
+
+    private fun openAccountsPage() {
+        val intent = Intent(this, UserAccountsActivity::class.java)
+        startActivity(intent)
     }
 
     companion object {
