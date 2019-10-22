@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.widget.Button
 import android.widget.TextView
 import org.jetbrains.anko.doAsync
+import org.json.JSONArray
 import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader
@@ -40,15 +41,11 @@ class UserAccountsActivity : AppCompatActivity() {
         val url = URL(moneyBoxAPIString)
         val con = url.openConnection() as HttpsURLConnection
         con.requestMethod = "GET"
-        var headers: Map<String, List<String>> = mapOf("Authorization" to listOf(authorisationString),
-            "AppId" to listOf("3a97b932a9d449c981b595"), "Content-Type" to listOf("application/json"),
-            "appVersion" to listOf("5.10.0"), "apiVersion" to listOf("3.0.0"))
-        print("Header fields: " + con.headerFields)
-//        con.setRequestProperty("Authorization", authorisationString)
-//        con.setRequestProperty("AppId", "3a97b932a9d449c981b595")
-//        con.setRequestProperty("Content-Type", "application/json")
-//        con.setRequestProperty("appVersion", "5.10.0")
-//        con.setRequestProperty("apiVersion", "3.0.0")
+        con.setRequestProperty("Authorization", authorisationString)
+        con.setRequestProperty("AppId", "3a97b932a9d449c981b595")
+        con.setRequestProperty("Content-Type", "application/json")
+        con.setRequestProperty("appVersion", "5.10.0")
+        con.setRequestProperty("apiVersion", "3.0.0")
         val input = BufferedReader(InputStreamReader(con.inputStream))
         val response = StringBuilder()
         var line: String
@@ -56,9 +53,19 @@ class UserAccountsActivity : AppCompatActivity() {
             line = input.readLine()
             response.append(line)
         }
-        //print result
-        println("Message here!")
-        println(response.toString())
+        //format result
+        val jsonArray = JSONArray(response)
+        for (i in 0..jsonArray.length()) {
+            val item = jsonArray.getJSONObject(i)
+            val accName = item.get("accountName") as String
+            val value = item.get("value") as String
+            val moneybox = item.get("moneybox") as String
+
+            val buttons = arrayOf(accButton1, accButton2, accButton3)
+            for (button in buttons) {
+                button.text = "$accName\nPlan Value: $value\nMoneybox: $moneybox"
+            }
+        }
 
     } catch (ex: IOException) {
         println("Could not get requested URL")
